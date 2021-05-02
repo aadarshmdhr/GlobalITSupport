@@ -1,9 +1,11 @@
-package com.example.globalitsupport;
+package com.example.globalitsupport.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.WindowManager;
+
+import com.example.globalitsupport.R;
 
 public class MainActivity extends AppCompatActivity {
 
