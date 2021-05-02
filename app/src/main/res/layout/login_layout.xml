@@ -7,16 +7,16 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/gitlogo"
-        android:layout_width="0dp"
+        android:layout_width="340dp"
         android:layout_height="350dp"
-        android:background="@mipmap/gitlogo"
+        android:src="@mipmap/gitlogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/username"
-        android:layout_width="0dp"
+        android:layout_width="340dp"
         android:layout_height="50dp"
         android:layout_margin="25dp"
         android:background="@drawable/txt_selector"
@@ -30,7 +30,7 @@
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/password"
-        android:layout_width="0dp"
+        android:layout_width="340dp"
         android:layout_height="50dp"
         android:layout_margin="25dp"
         android:background="@drawable/txt_selector"
@@ -54,7 +54,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/btn_selector"
@@ -69,6 +69,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="40dp"
+        android:background="#aaa"
         app:layout_constraintEnd_toEndOf="@id/username"
         app:layout_constraintStart_toStartOf="@id/username"
         app:layout_constraintTop_toBottomOf="@id/login" />
@@ -80,7 +81,7 @@
         android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="Don't have an account?"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/username"
         app:layout_constraintStart_toStartOf="@id/username"
         app:layout_constraintTop_toBottomOf="@id/login" />
