@@ -8,7 +8,8 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/gitlogo"
         android:layout_width="340dp"
-        android:layout_height="350dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="80dp"
         android:src="@mipmap/gitlogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,7 +19,7 @@
         android:id="@+id/username"
         android:layout_width="340dp"
         android:layout_height="50dp"
-        android:layout_margin="25dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/txt_selector"
         android:drawableLeft="@drawable/ic_baseline_person_24"
         android:gravity="center"
@@ -64,14 +65,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rememberme" />
-    <!--sano view lekhnu hunna, View halnu parxa-->
+
     <View
-        android:layout_width="0dp"
+        android:layout_width="280dp"
         android:layout_height="1dp"
         android:layout_marginTop="40dp"
         android:background="#aaa"
-        app:layout_constraintEnd_toEndOf="@id/username"
-        app:layout_constraintStart_toStartOf="@id/username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -88,6 +89,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
+        android:id="@+id/signup"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:gravity="center"

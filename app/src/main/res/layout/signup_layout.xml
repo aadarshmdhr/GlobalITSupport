@@ -7,14 +7,15 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/gitlogo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
+        android:layout_marginTop="20dp"
         android:src="@mipmap/gitlogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/fname"
+        android:id="@+id/name"
         android:layout_width="340dp"
         android:layout_height="50dp"
         android:layout_margin="25dp"
@@ -31,7 +32,7 @@
         android:id="@+id/address"
         android:layout_width="340dp"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/txt_selector"
         android:drawableLeft="@drawable/ic_baseline_home_24"
         android:gravity="center"
@@ -39,13 +40,13 @@
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fname" />
+        app:layout_constraintTop_toBottomOf="@id/name" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/phone"
         android:layout_width="340dp"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/txt_selector"
         android:drawableLeft="@drawable/ic_baseline_smartphone_24"
         android:gravity="center"
@@ -59,7 +60,7 @@
         android:id="@+id/email"
         android:layout_width="340dp"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/txt_selector"
         android:drawableLeft="@drawable/ic_baseline_mail_outline_24"
         android:gravity="center"
@@ -73,7 +74,7 @@
         android:id="@+id/username"
         android:layout_width="340dp"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/txt_selector"
         android:drawableLeft="@drawable/ic_baseline_person_24"
         android:gravity="center"
@@ -87,21 +88,22 @@
         android:id="@+id/password"
         android:layout_width="340dp"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/txt_selector"
         android:drawableLeft="@drawable/ic_baseline_lock_open_24"
         android:gravity="center"
         android:hint="Password"
+        android:inputType="textPassword"
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/username" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/Signup"
+        android:id="@+id/signup"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/btn_selector"
         android:text="Sign Up"
         android:textAllCaps="false"
@@ -112,13 +114,13 @@
 
     <View
         android:id="@+id/divider"
-        android:layout_width="0dp"
+        android:layout_width="280dp"
         android:layout_height="1dp"
         android:layout_marginTop="20dp"
         android:background="#aaa"
-        app:layout_constraintEnd_toEndOf="@id/fname"
-        app:layout_constraintStart_toStartOf="@id/fname"
-        app:layout_constraintTop_toBottomOf="@id/Signup" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signup" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/acc"
@@ -133,6 +135,7 @@
         app:layout_constraintTop_toBottomOf="@id/divider" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
