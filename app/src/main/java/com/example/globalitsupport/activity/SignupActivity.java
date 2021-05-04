@@ -3,6 +3,7 @@ package com.example.globalitsupport.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -15,6 +16,12 @@ import com.example.globalitsupport.R;
 
 public class SignupActivity extends AppCompatActivity {
 
+    EditText name, address, phone, email, username, password;
+    Button signup;
+    TextView login;
+
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,9 +30,7 @@ public class SignupActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.signup_layout);
 
-        EditText name, address, phone, email, username, password;
-        Button signup;
-        TextView login;
+        sharedPreferences = getSharedPreferences("Userinfo", 0);
 
         name = findViewById(R.id.name);
         address = findViewById(R.id.address);
@@ -59,11 +64,22 @@ public class SignupActivity extends AppCompatActivity {
         String usernameValue = username.getText().toString();
         String passwordValue = password.getText().toString();
 
-        Toast.makeText(this, "Name" + nameValue
-                + "Address" + addressValue
-                + "Phone" + phoneValue
-                + "Email" + emailValue
-                + "Username" + usernameValue
-                + "Password" + passwordValue, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Name:" + nameValue
+                + "\nAddress:" + addressValue
+                + "\nPhone:" + phoneValue
+                + "\nEmail:" + emailValue
+                + "\nUsername:" + usernameValue
+                + "\nPassword:" + passwordValue, Toast.LENGTH_SHORT).show();
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("name", nameValue);
+        editor.putString("address", addressValue);
+        editor.putString("phone", phoneValue);
+        editor.putString("email", emailValue);
+        editor.putString("username", usernameValue);
+        editor.putString("password", passwordValue);
+        editor.apply();
+
+        Toast.makeText(this, "User registered", Toast.LENGTH_SHORT).show();
     }
 }

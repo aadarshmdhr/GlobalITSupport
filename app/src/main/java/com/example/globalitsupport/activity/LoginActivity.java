@@ -3,6 +3,7 @@ package com.example.globalitsupport.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,6 +17,13 @@ import com.example.globalitsupport.R;
 
 public class LoginActivity extends AppCompatActivity {
 
+    EditText username, password;
+    CheckBox rememberme;
+    Button login;
+    TextView signup;
+
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.login_layout);
 
-        EditText username, password;
-        CheckBox rememberme;
-        Button login;
-        TextView signup;
+        sharedPreferences = getSharedPreferences("Userinfo", 0);
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
@@ -35,10 +40,25 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
         signup = findViewById(R.id.signup);
 
+        if (sharedPreferences.getBoolean("rememberme", false)) {
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
+        }
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "Login button clicked", Toast.LENGTH_SHORT).show();
+                String usernameValue = username.getText().toString();
+                String passwordValue = password.getText().toString();
+                String registerUsername = sharedPreferences.getString("username", "");
+                String registerPassword = sharedPreferences.getString("password", "");
+                if (registerPassword.equals(password.getText().toString()) && registerUsername.equals(username.getText().toString())) {
+                    if (rememberme.isChecked()) {
+                        sharedPreferences.edit().putBoolean("rememberme", true).apply();
+                    }
+                } else {
+                    Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {
