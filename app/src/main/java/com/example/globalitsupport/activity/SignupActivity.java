@@ -81,5 +81,8 @@ public class SignupActivity extends AppCompatActivity {
         editor.apply();
 
         Toast.makeText(this, "User registered", Toast.LENGTH_SHORT).show();
+
+        startActivity(new Intent(SignupActivity.this, HomeActivity.class));
+        finish();
     }
 }

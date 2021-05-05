@@ -27,7 +27,15 @@ public class HomeActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.home_layout);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("Userinfo", 0);
+        sharedPreferences = getSharedPreferences("Userinfo", 0);
+
+        gitlogo = findViewById(R.id.gitlogo);
+        gitlogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, WebviewActivity.class));
+            }
+        });
 
         popupmenu = findViewById(R.id.popupmenu);
         popupmenu.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.logout) {
-                    sharedPreferences.edit().putBoolean("rememnerme", false).apply();
+                    sharedPreferences.edit().putBoolean("rememberme", false).apply();
                     startActivity(new Intent(HomeActivity.this, LoginActivity.class));
                     finish();
                 }

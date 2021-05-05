@@ -50,9 +50,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String usernameValue = username.getText().toString();
                 String passwordValue = password.getText().toString();
-                String registerUsername = sharedPreferences.getString("username", "");
-                String registerPassword = sharedPreferences.getString("password", "");
-                if (registerPassword.equals(password.getText().toString()) && registerUsername.equals(username.getText().toString())) {
+                String registeredUsername = sharedPreferences.getString("username", "");
+                String registeredPassword = sharedPreferences.getString("password", "");
+                if (registeredPassword.equals(passwordValue) && registeredUsername.equals(usernameValue)) {
                     if (rememberme.isChecked()) {
                         sharedPreferences.edit().putBoolean("rememberme", true).apply();
                     }
