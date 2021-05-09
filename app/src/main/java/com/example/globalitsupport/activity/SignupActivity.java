@@ -2,6 +2,7 @@ package com.example.globalitsupport.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,7 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.globalitsupport.DatabaseHelper;
 import com.example.globalitsupport.R;
+import com.example.globalitsupport.UserInfo;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -20,7 +23,11 @@ public class SignupActivity extends AppCompatActivity {
     Button signup;
     TextView login;
 
+    int id;
+
     SharedPreferences sharedPreferences;
+
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +37,9 @@ public class SignupActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.signup_layout);
 
+        id = getIntent().getIntExtra("id", 0);
         sharedPreferences = getSharedPreferences("Userinfo", 0);
+        databaseHelper = new DatabaseHelper(this);
 
         name = findViewById(R.id.name);
         address = findViewById(R.id.address);
@@ -41,6 +50,15 @@ public class SignupActivity extends AppCompatActivity {
         signup = findViewById(R.id.signup);
         login = findViewById(R.id.login);
 
+        if (id != 0) {
+            final UserInfo info = databaseHelper.getUserInfo(id + "");
+            name.setText(info.name);
+            address.setText(info.address);
+            phone.setText(info.phone);
+            email.setText(info.email);
+            username.setText(info.username);
+            signup.setText("Update");
+        }
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,18 +89,24 @@ public class SignupActivity extends AppCompatActivity {
                 + "\nUsername:" + usernameValue
                 + "\nPassword:" + passwordValue, Toast.LENGTH_SHORT).show();
 
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("name", nameValue);
-        editor.putString("address", addressValue);
-        editor.putString("phone", phoneValue);
-        editor.putString("email", emailValue);
-        editor.putString("username", usernameValue);
-        editor.putString("password", passwordValue);
-        editor.apply();
-
         Toast.makeText(this, "User registered", Toast.LENGTH_SHORT).show();
 
         startActivity(new Intent(SignupActivity.this, HomeActivity.class));
-        finish();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", nameValue);
+        contentValues.put("address", addressValue);
+        contentValues.put("phone", phoneValue);
+        contentValues.put("email", emailValue);
+        contentValues.put("username", usernameValue);
+        contentValues.put("password", passwordValue);
+        if (id == 0) {
+            databaseHelper.insertUser(contentValues);
+            Toast.makeText(this, "User inserted", Toast.LENGTH_SHORT).show();
+        } else {
+            databaseHelper.updateUser(String.valueOf(id), contentValues);
+            Toast.makeText(this, "User updated", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 }

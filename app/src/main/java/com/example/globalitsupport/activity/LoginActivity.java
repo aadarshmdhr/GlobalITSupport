@@ -56,6 +56,8 @@ public class LoginActivity extends AppCompatActivity {
                     if (rememberme.isChecked()) {
                         sharedPreferences.edit().putBoolean("rememberme", true).apply();
                     }
+                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                    finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                 }

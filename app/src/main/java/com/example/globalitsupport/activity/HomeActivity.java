@@ -15,7 +15,7 @@ import com.example.globalitsupport.R;
 
 public class HomeActivity extends AppCompatActivity {
 
-    ImageView gitlogo, popupmenu;
+    ImageView gitlogo, profile, popupmenu;
 
     SharedPreferences sharedPreferences;
 
@@ -34,6 +34,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, WebviewActivity.class));
+            }
+        });
+
+        profile = findViewById(R.id.profile);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, UserlistActivity.class));
+                finish();
             }
         });
 
