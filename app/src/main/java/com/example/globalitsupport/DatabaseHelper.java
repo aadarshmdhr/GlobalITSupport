@@ -50,6 +50,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         getWritableDatabase().update("user", contentValues, "id=" + id, null);
     }
 
+    public void deleteUser(String id) {
+        getWritableDatabase().delete("user", "id=" + id, null);
+    }
+
     public ArrayList<UserInfo> getUserList() {
         String sql = "Select * from user";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);

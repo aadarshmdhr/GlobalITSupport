@@ -32,12 +32,18 @@ public class UserlistActivity extends AppCompatActivity {
 
         container = findViewById(R.id.container);
         databaseHelper = new DatabaseHelper(this);
-        showUserList();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showUserList();
     }
 
     public void showUserList() {
         ArrayList<UserInfo> list = databaseHelper.getUserList();
+        container.removeAllViews();
 
         for (UserInfo info : list) {
 
