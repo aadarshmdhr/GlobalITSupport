@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 
 import androidx.annotation.Nullable;
 
@@ -48,6 +49,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void updateUser(String id, ContentValues contentValues) {
         getWritableDatabase().update("user", contentValues, "id=" + id, null);
+    }
+
+    public boolean isLoginSuccessful(String username, String password) {
+        String sql = "Select count(*) from user where username='" + username + "' and password='" + password + "'";
+        SQLiteStatement stm = getReadableDatabase().compileStatement(sql);
+        long l = stm.simpleQueryForLong();
+        if (l == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void deleteUser(String id) {

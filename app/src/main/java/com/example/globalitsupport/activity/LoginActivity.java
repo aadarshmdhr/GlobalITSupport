@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.globalitsupport.DatabaseHelper;
 import com.example.globalitsupport.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -24,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
+    DatabaseHelper databaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_layout);
 
         sharedPreferences = getSharedPreferences("Userinfo", 0);
+
+        databaseHelper = new DatabaseHelper(this);
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
@@ -52,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                 String passwordValue = password.getText().toString();
                 String registeredUsername = sharedPreferences.getString("username", "");
                 String registeredPassword = sharedPreferences.getString("password", "");
-                if (registeredPassword.equals(passwordValue) && registeredUsername.equals(usernameValue)) {
+                if (databaseHelper.isLoginSuccessful(usernameValue, passwordValue)) {
                     if (rememberme.isChecked()) {
                         sharedPreferences.edit().putBoolean("rememberme", true).apply();
                     }
