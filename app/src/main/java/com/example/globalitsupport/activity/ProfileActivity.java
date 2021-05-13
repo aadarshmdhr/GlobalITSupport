@@ -1,25 +1,37 @@
 package com.example.globalitsupport.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.globalitsupport.DatabaseHelper;
 import com.example.globalitsupport.R;
 import com.example.globalitsupport.UserInfo;
 
+import java.io.ByteArrayOutputStream;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileActivity extends AppCompatActivity {
 
     TextView name, address, phone, email, username;
     Button update, delete, back;
+
+    ImageView imageView;
 
     String id;
 
@@ -40,11 +52,13 @@ public class ProfileActivity extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(this);
 
         id = getIntent().getStringExtra("id");
+
         name = findViewById(R.id.name);
         address = findViewById(R.id.address);
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
         username = findViewById(R.id.username);
+        imageView = findViewById(R.id.profileimage);
 
         update = findViewById(R.id.update);
         delete = findViewById(R.id.delete);
@@ -72,6 +86,7 @@ public class ProfileActivity extends AppCompatActivity {
         phone.setText(info.phone);
         email.setText(info.email);
         username.setText(info.username);
+        imageView.setImageBitmap(SignupActivity.getBitmap(info.image));
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

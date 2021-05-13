@@ -52,6 +52,7 @@ public class UserlistActivity extends AppCompatActivity {
             ImageView imageView = view.findViewById(R.id.profileimage);
             TextView name = view.findViewById(R.id.name);
             TextView phone = view.findViewById(R.id.phone);
+            imageView.setImageBitmap(SignupActivity.getBitmap(info.image));
             name.setText(info.name);
             phone.setText(info.phone);
             view.setOnClickListener(new View.OnClickListener() {
