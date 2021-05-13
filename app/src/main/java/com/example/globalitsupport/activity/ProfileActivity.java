@@ -21,10 +21,10 @@ import android.widget.TextView;
 import com.example.globalitsupport.DatabaseHelper;
 import com.example.globalitsupport.R;
 import com.example.globalitsupport.UserInfo;
+import com.example.globalitsupport.utils.AppUtil;
 
 import java.io.ByteArrayOutputStream;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -86,7 +86,8 @@ public class ProfileActivity extends AppCompatActivity {
         phone.setText(info.phone);
         email.setText(info.email);
         username.setText(info.username);
-        imageView.setImageBitmap(SignupActivity.getBitmap(info.image));
+        if(info.image != null)
+            imageView.setImageBitmap(AppUtil.getBitmap(info.image));
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

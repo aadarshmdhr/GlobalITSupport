@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.globalitsupport.DatabaseHelper;
 import com.example.globalitsupport.R;
 import com.example.globalitsupport.UserInfo;
+import com.example.globalitsupport.utils.AppUtil;
 
 import java.util.ArrayList;
 
@@ -52,7 +53,8 @@ public class UserlistActivity extends AppCompatActivity {
             ImageView imageView = view.findViewById(R.id.profileimage);
             TextView name = view.findViewById(R.id.name);
             TextView phone = view.findViewById(R.id.phone);
-            imageView.setImageBitmap(SignupActivity.getBitmap(info.image));
+            if(info.image != null)
+                imageView.setImageBitmap(AppUtil.getBitmap(info.image));
             name.setText(info.name);
             phone.setText(info.phone);
             view.setOnClickListener(new View.OnClickListener() {

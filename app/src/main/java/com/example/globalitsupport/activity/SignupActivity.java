@@ -151,8 +151,4 @@ public class SignupActivity extends AppCompatActivity {
         Log.i("bytearray", sb.toString());
         return bArray;
     }
-
-    public static Bitmap getBitmap(byte[] byteArray) {
-        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-    }
 }
