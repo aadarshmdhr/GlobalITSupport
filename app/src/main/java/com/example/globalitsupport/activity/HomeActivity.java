@@ -1,6 +1,8 @@
 package com.example.globalitsupport.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 
 import com.example.globalitsupport.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -26,6 +29,9 @@ public class HomeActivity extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.home_layout);
+
+        BottomNavigationView bottomnav = findViewById(R.id.bottom_navagation);
+        navListener.onNavigationItemSelected((MenuItem) navListener);
 
         sharedPreferences = getSharedPreferences("Userinfo", 0);
 
@@ -72,4 +78,12 @@ public class HomeActivity extends AppCompatActivity {
         });
         popupMenu.show();
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull @org.jetbrains.annotations.NotNull MenuItem item) {
+            Fragment selectFragment = null;
+            return false;
+        }
+    };
 }
