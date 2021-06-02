@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
+import com.example.globalitsupport.models.Laptop;
 import com.example.globalitsupport.models.UserInfo;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "\t`image`\tBLOB\n" +
             ")";
 
-    String nextTable = "CREATE TABLE if not exists `user` (\n" +
+    String nextTable = "CREATE TABLE if not exists `laptop` (\n" +
             "\t`id`\tINTEGER PRIMARY KEY AUTOINCREMENT,\n" +
             "\t`name`\tTEXT,\n" +
             "\t`address`\tTEXT,\n" +
@@ -106,6 +107,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return info;
+    }
+
+    public Laptop getLaptop(String id) {
+        String sql = "Select * from laptop where id =" + id;
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+
+        Laptop laptop = new Laptop();
+        while (cursor.moveToNext()) {
+            laptop.setId(cursor.getInt(cursor.getColumnIndex("id")));
+            laptop.setName(cursor.getString(cursor.getColumnIndex("name")));
+            laptop.setImage(cursor.getBlob(cursor.getColumnIndex("image")));
+
+        }
+        cursor.close();
+        return laptop;
     }
 
     @Override
