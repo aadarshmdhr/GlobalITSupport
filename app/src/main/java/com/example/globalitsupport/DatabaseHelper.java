@@ -109,6 +109,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return info;
     }
 
+    public ArrayList<Laptop> getAllLaptop() {
+        String sql = "Select * from laptop";
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+
+        ArrayList<Laptop> laptops = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            Laptop laptop = new Laptop();
+            laptop.setId(cursor.getInt(cursor.getColumnIndex("id")));
+            laptop.setName(cursor.getString(cursor.getColumnIndex("name")));
+            laptop.setImage(cursor.getBlob(cursor.getColumnIndex("image")));
+            laptops.add(laptop);
+        }
+        cursor.close();
+        return laptops;
+    }
+
     public Laptop getLaptop(String id) {
         String sql = "Select * from laptop where id =" + id;
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
