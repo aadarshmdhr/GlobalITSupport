@@ -1,17 +1,12 @@
 package com.example.globalitsupport.activity;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -20,10 +15,8 @@ import android.widget.TextView;
 
 import com.example.globalitsupport.DatabaseHelper;
 import com.example.globalitsupport.R;
-import com.example.globalitsupport.UserInfo;
+import com.example.globalitsupport.models.UserInfo;
 import com.example.globalitsupport.utils.AppUtil;
-
-import java.io.ByteArrayOutputStream;
 
 
 public class ProfileActivity extends AppCompatActivity {
@@ -66,7 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, HomeActivity.class));
+                startActivity(new Intent(ProfileActivity.this, MainActivity.class));
                 finish();
             }
         });

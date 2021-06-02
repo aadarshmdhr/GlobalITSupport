@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
-import androidx.annotation.Nullable;
+import com.example.globalitsupport.models.UserInfo;
 
 import java.util.ArrayList;
 

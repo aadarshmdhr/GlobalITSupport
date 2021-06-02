@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.globalitsupport.R;
 
-public class SearchFragment extends Fragment {
+public class DetailFragment extends Fragment {
 
     @Nullable
     @Override

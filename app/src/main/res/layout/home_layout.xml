@@ -50,8 +50,8 @@
         app:layout_constraintStart_toEndOf="@id/profile"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewLaptop"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_navagation"

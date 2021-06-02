@@ -46,26 +46,23 @@ public class LoginActivity extends AppCompatActivity {
         signup = findViewById(R.id.signup);
 
         if (sharedPreferences.getBoolean("rememberme", false)) {
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String usernameValue = username.getText().toString();
-                String passwordValue = password.getText().toString();
-                String registeredUsername = sharedPreferences.getString("username", "");
-                String registeredPassword = sharedPreferences.getString("password", "");
-                if (databaseHelper.isLoginSuccessful(usernameValue, passwordValue)) {
-                    if (rememberme.isChecked()) {
-                        sharedPreferences.edit().putBoolean("rememberme", true).apply();
-                    }
-                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+        login.setOnClickListener(v -> {
+            String usernameValue = username.getText().toString();
+            String passwordValue = password.getText().toString();
+            String registeredUsername = sharedPreferences.getString("username", "");
+            String registeredPassword = sharedPreferences.getString("password", "");
+            if (databaseHelper.isLoginSuccessful(usernameValue, passwordValue)) {
+                if (rememberme.isChecked()) {
+                    sharedPreferences.edit().putBoolean("rememberme", true).apply();
                 }
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
+            } else {
+                Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {

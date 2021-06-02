@@ -7,7 +7,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -21,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.globalitsupport.DatabaseHelper;
 import com.example.globalitsupport.R;
-import com.example.globalitsupport.UserInfo;
+import com.example.globalitsupport.models.UserInfo;
 
 import java.io.ByteArrayOutputStream;
 
@@ -120,7 +119,7 @@ public class SignupActivity extends AppCompatActivity {
 
         Toast.makeText(this, "User registered", Toast.LENGTH_SHORT).show();
 
-        startActivity(new Intent(SignupActivity.this, HomeActivity.class));
+        startActivity(new Intent(SignupActivity.this, MainActivity.class));
 
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", nameValue);

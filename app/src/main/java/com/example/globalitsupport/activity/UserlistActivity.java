@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.globalitsupport.DatabaseHelper;
 import com.example.globalitsupport.R;
-import com.example.globalitsupport.UserInfo;
+import com.example.globalitsupport.models.UserInfo;
 import com.example.globalitsupport.utils.AppUtil;
 
 import java.util.ArrayList;
