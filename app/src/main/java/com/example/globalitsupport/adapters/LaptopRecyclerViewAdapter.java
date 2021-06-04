@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.globalitsupport.DatabaseHelper;
 import com.example.globalitsupport.R;
 import com.example.globalitsupport.models.Laptop;
 import com.example.globalitsupport.viewholders.LaptopRecyclerViewAdapterViewHolder;
@@ -17,20 +18,23 @@ public class LaptopRecyclerViewAdapter extends RecyclerView.Adapter<LaptopRecycl
     ArrayList<Laptop> laptopArrayList;
     LaptopRecyclerAdapterInteraction listener;
 
+    DatabaseHelper databaseHelper;
+
     public LaptopRecyclerViewAdapter(ArrayList<Laptop> laptopArrayList, LaptopRecyclerAdapterInteraction listener){
        this.laptopArrayList = laptopArrayList;
        this.listener = listener;
+
     }
 
     @NonNull
     @org.jetbrains.annotations.NotNull
     @Override
-    public LaptopRecyclerViewAdapterViewHolder onCreateViewHolder(@NonNull @org.jetbrains.annotations.NotNull ViewGroup parent, int viewType) {
+    public LaptopRecyclerViewAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new LaptopRecyclerViewAdapterViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_laptop_view_design, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull LaptopRecyclerViewAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(LaptopRecyclerViewAdapterViewHolder holder, int position) {
         if(laptopArrayList != null){
             if(!laptopArrayList.isEmpty()) {
                 Laptop laptop = laptopArrayList.get(position);

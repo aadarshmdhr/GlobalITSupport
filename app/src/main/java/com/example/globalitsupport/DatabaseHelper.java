@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
+import com.example.globalitsupport.fragments.HomeFragment;
 import com.example.globalitsupport.models.Laptop;
 import com.example.globalitsupport.models.UserInfo;
 
@@ -28,15 +29,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "\t`image`\tBLOB\n" +
             ")";
 
-    String nextTable = "CREATE TABLE if not exists `laptop` (\n" +
+    String createTableLaptop = "CREATE TABLE if not exists `laptopdetail` (\n" +
             "\t`id`\tINTEGER PRIMARY KEY AUTOINCREMENT,\n" +
             "\t`name`\tTEXT,\n" +
-            "\t`address`\tTEXT,\n" +
-            "\t`phone`\tINTEGER,\n" +
-            "\t`email`\tTEXT,\n" +
-            "\t`username`\tTEXT,\n" +
-            "\t`password`\tTEXT,\n" +
-            "\t`image`\tBLOB\n" +
+            "\t`model`\tTEXT,\n" +
+            "\t`ram`\tTEXT,\n" +
+            "\t`harddrive`\tTEXT,\n" +
+            "\t`os`\tTEXT,\n" +
+            "\t`gpuprocessor`\tTEXT,\n" +
+            "\t`detail`\tTEXT,\n" +
+            "\t`image`\tBLOB,\n" +
+            "\t`price`\tINTEGER\n" +
             ")";
 
     public DatabaseHelper(Context context) {
@@ -44,12 +47,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         getWritableDatabase().execSQL(createTableUser);
     }
 
+    public DatabaseHelper(HomeFragment context){
+        super(context, name, null, version);
+        getWritableDatabase().execSQL(createTableLaptop);
+    }
+
     public void insertUser(ContentValues contentValues) {
         getWritableDatabase().insert("user", "", contentValues);
     }
 
+    public void insertLaptop(ContentValues contentValues) {
+        getWritableDatabase().insert("laptopdetail", "", contentValues);
+    }
+
     public void updateUser(String id, ContentValues contentValues) {
         getWritableDatabase().update("user", contentValues, "id=" + id, null);
+    }
+
+    public void updateLaptop(String id, ContentValues contentValues) {
+        getWritableDatabase().update("laptopdetail", contentValues, "id=" + id, null);
     }
 
     public boolean isLoginSuccessful(String username, String password) {
@@ -65,6 +81,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void deleteUser(String id) {
         getWritableDatabase().delete("user", "id=" + id, null);
+    }
+
+    public void deleteLaptop(String id) {
+        getWritableDatabase().delete("laptopdetail", "id", null);
     }
 
     public ArrayList<UserInfo> getUserList() {
@@ -110,7 +130,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Laptop> getAllLaptop() {
-        String sql = "Select * from laptop";
+        String sql = "Select * from laptopdetail";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
 
         ArrayList<Laptop> laptops = new ArrayList<>();
@@ -118,7 +138,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Laptop laptop = new Laptop();
             laptop.setId(cursor.getInt(cursor.getColumnIndex("id")));
             laptop.setName(cursor.getString(cursor.getColumnIndex("name")));
+            laptop.setModelNo(cursor.getString(cursor.getColumnIndex("modelno")));
+            laptop.setRam(cursor.getString(cursor.getColumnIndex("ram")));
+            laptop.setHardDrive(cursor.getString(cursor.getColumnIndex("harddrive")));
+            laptop.setOs(cursor.getString(cursor.getColumnIndex("os")));
+            laptop.setGpuProcessor(cursor.getString(cursor.getColumnIndex("gpuprocessor")));
+            laptop.setDetail(cursor.getString(cursor.getColumnIndex("detail")));
             laptop.setImage(cursor.getBlob(cursor.getColumnIndex("image")));
+            laptop.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
             laptops.add(laptop);
         }
         cursor.close();
@@ -126,15 +153,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Laptop getLaptop(String id) {
-        String sql = "Select * from laptop where id =" + id;
+        String sql = "Select * from laptopdetail where id =" + id;
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
 
         Laptop laptop = new Laptop();
         while (cursor.moveToNext()) {
             laptop.setId(cursor.getInt(cursor.getColumnIndex("id")));
             laptop.setName(cursor.getString(cursor.getColumnIndex("name")));
+            laptop.setModelNo(cursor.getString(cursor.getColumnIndex("modelno")));
+            laptop.setRam(cursor.getString(cursor.getColumnIndex("ram")));
+            laptop.setHardDrive(cursor.getString(cursor.getColumnIndex("harddrive")));
+            laptop.setOs(cursor.getString(cursor.getColumnIndex("os")));
+            laptop.setGpuProcessor(cursor.getString(cursor.getColumnIndex("gpuprocessor")));
+            laptop.setDetail(cursor.getString(cursor.getColumnIndex("detail")));
             laptop.setImage(cursor.getBlob(cursor.getColumnIndex("image")));
-
+            laptop.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
         }
         cursor.close();
         return laptop;
@@ -147,6 +180,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(createTableUser);
-        db.execSQL(nextTable);
+        db.execSQL(createTableLaptop);
     }
 }
