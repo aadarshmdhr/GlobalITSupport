@@ -37,4 +37,9 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.Home
     public void onLaptopClicked() {
         startFragment(new DetailFragment(), true);
     }
+
+    @Override
+    public void onFABClicked() {
+        startFragment(new DetailFragment(), true);
+    }
 }

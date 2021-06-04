@@ -122,6 +122,7 @@ public class SignupActivity extends AppCompatActivity {
         startActivity(new Intent(SignupActivity.this, MainActivity.class));
 
         ContentValues contentValues = new ContentValues();
+        contentValues.put("id", 1);
         contentValues.put("name", nameValue);
         contentValues.put("address", addressValue);
         contentValues.put("phone", phoneValue);

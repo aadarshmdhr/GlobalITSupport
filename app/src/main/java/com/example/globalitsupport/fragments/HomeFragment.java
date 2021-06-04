@@ -15,6 +15,7 @@ import com.example.globalitsupport.DatabaseHelper;
 import com.example.globalitsupport.R;
 import com.example.globalitsupport.adapters.LaptopRecyclerViewAdapter;
 import com.example.globalitsupport.models.Laptop;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -25,16 +26,11 @@ public class HomeFragment extends Fragment {
     DatabaseHelper databaseHelper;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        databaseHelper = new DatabaseHelper(this);
-    }
-
-    @Override
     public void onAttach(Context context) {
         if (context instanceof HomeFragmentInteraction) {
             listener = (HomeFragmentInteraction) context;
         }
+        databaseHelper = new DatabaseHelper(context);
         super.onAttach(context);
     }
 
@@ -49,6 +45,13 @@ public class HomeFragment extends Fragment {
         RecyclerView recyclerViewLaptop = requireActivity().findViewById(R.id.recyclerViewLaptop);
         recyclerViewLaptop.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
         recyclerViewLaptop.setAdapter(new LaptopRecyclerViewAdapter(getLaptop(), () -> listener.onLaptopClicked())); //Fetch & Send laptop data from database
+
+        FloatingActionButton fabInsertNewLaptop = requireActivity().findViewById(R.id.fabInsertNewLaptop);
+        fabInsertNewLaptop.setOnClickListener(view1 -> {
+            listener.onFABClicked();
+        });
+
+//        sharedPreferences.getInt("userId", 1); //Use this to get User Id
     }
 
     private ArrayList<Laptop> getLaptop() {
@@ -66,5 +69,6 @@ public class HomeFragment extends Fragment {
 
     public interface HomeFragmentInteraction {
         void onLaptopClicked();
+        void onFABClicked();
     }
 }

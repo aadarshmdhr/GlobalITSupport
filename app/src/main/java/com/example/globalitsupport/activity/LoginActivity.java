@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
         signup = findViewById(R.id.signup);
 
+
         if (sharedPreferences.getBoolean("rememberme", false)) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();

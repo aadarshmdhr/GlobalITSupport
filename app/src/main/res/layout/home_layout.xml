@@ -6,54 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activity.HomeActivity">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/gitlogo"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@mipmap/gitlogo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/search"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="15dp"
-        android:background="@drawable/txt_selector"
-        android:drawableLeft="@drawable/ic_baseline_search_24"
-        android:gravity="center"
-        android:hint="Search"
-        android:padding="10dp"
-        app:layout_constraintStart_toEndOf="@id/gitlogo"
-        app:layout_constraintEnd_toStartOf="@id/profile"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/profile"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/profile"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/popupmenu"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/popupmenu"
-        android:layout_width="35dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_baseline_more_vert_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewLaptop"
         android:layout_width="0dp"
@@ -61,7 +13,19 @@
         app:layout_constraintBottom_toTopOf="@id/bottom_navagation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gitlogo" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabInsertNewLaptop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add"
+        app:fabSize="mini"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navagation"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navagation"

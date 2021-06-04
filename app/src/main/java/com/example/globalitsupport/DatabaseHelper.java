@@ -2,6 +2,7 @@ package com.example.globalitsupport;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -17,6 +18,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     static String name = "GITDB";
     static int version = 1;
+
+    Context context;
+
+    SharedPreferences sharedPreferences;
 
     String createTableUser = "CREATE TABLE if not exists `user` (\n" +
             "\t`id`\tINTEGER PRIMARY KEY AUTOINCREMENT,\n" +
@@ -44,11 +49,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, name, null, version);
+        this.context =context;
+        sharedPreferences = context.getSharedPreferences("Userinfo", 0);
         getWritableDatabase().execSQL(createTableUser);
-    }
-
-    public DatabaseHelper(HomeFragment context){
-        super(context, name, null, version);
         getWritableDatabase().execSQL(createTableLaptop);
     }
 
@@ -70,13 +73,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean isLoginSuccessful(String username, String password) {
         String sql = "Select count(*) from user where username='" + username + "' and password='" + password + "'";
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+        while(cursor.moveToNext()){
+            int userId = cursor.getInt(cursor.getColumnIndex("id"));
+            sharedPreferences.edit().putInt("userId", userId).apply();
+        }
+        cursor.close();
         SQLiteStatement stm = getReadableDatabase().compileStatement(sql);
         long l = stm.simpleQueryForLong();
-        if (l == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return l == 1;
     }
 
     public void deleteUser(String id) {
@@ -94,7 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<UserInfo> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             UserInfo info = new UserInfo();
-            info.id = cursor.getString(cursor.getColumnIndex("id"));
+            info.id = cursor.getInt(cursor.getColumnIndex("id"));
             info.name = cursor.getString(cursor.getColumnIndex("name"));
             info.address = cursor.getString(cursor.getColumnIndex("address"));
             info.phone = cursor.getString(cursor.getColumnIndex("phone"));
@@ -115,7 +120,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         UserInfo info = new UserInfo();
         while (cursor.moveToNext()) {
-            info.id = cursor.getString(cursor.getColumnIndex("id"));
+            info.id = cursor.getInt(cursor.getColumnIndex("id"));
             info.name = cursor.getString(cursor.getColumnIndex("name"));
             info.address = cursor.getString(cursor.getColumnIndex("address"));
             info.phone = cursor.getString(cursor.getColumnIndex("phone"));
@@ -136,6 +141,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<Laptop> laptops = new ArrayList<>();
         while (cursor.moveToNext()) {
             Laptop laptop = new Laptop();
+            laptop.setUserId(cursor.getInt(cursor.getColumnIndex("userId")));
             laptop.setId(cursor.getInt(cursor.getColumnIndex("id")));
             laptop.setName(cursor.getString(cursor.getColumnIndex("name")));
             laptop.setModelNo(cursor.getString(cursor.getColumnIndex("modelno")));
@@ -158,6 +164,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Laptop laptop = new Laptop();
         while (cursor.moveToNext()) {
+            laptop.setUserId(cursor.getInt(cursor.getColumnIndex("userId")));
             laptop.setId(cursor.getInt(cursor.getColumnIndex("id")));
             laptop.setName(cursor.getString(cursor.getColumnIndex("name")));
             laptop.setModelNo(cursor.getString(cursor.getColumnIndex("modelno")));
